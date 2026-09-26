@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Workspace — REMS</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="/index.html" class="sidebar-logo">
+          <div class="nav-logo-icon">🏢</div>
+          <span>REMS</span>
+        </a>
+        <span class="sidebar-badge">Agent</span>
+      </div>
+
+      <ul class="sidebar-nav">
+        <div class="nav-section-title">Workspace</div>
+        <li>
+          <a href="#" class="sidebar-item active" data-tab="overview">
+            <span class="sidebar-item-icon">📊</span>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="properties">
+            <span class="sidebar-item-icon">🏘️</span>
+            <span>My Properties</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="add-property">
+            <span class="sidebar-item-icon">➕</span>
+            <span>Add Property Wizard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="visits">
+            <span class="sidebar-item-icon">📅</span>
+            <span>Property Visits</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="bookings">
+            <span class="sidebar-item-icon">📑</span>
+            <span>Bookings & Finalize</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="commission">
+            <span class="sidebar-item-icon">💰</span>
+            <span>Sales & Commission</span>
+          </a>
+        </li>
+
+        <div class="nav-section-title">Portals</div>
+        <li>
+          <a href="/properties.html" class="sidebar-item">
+            <span class="sidebar-item-icon">🔍</span>
+            <span>Public Listings</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div id="dash-agent-avatar" class="user-avatar">R</div>
+          <div class="user-info-text">
+            <div id="dash-agent-name" class="user-name">Rahul Sharma</div>
+            <div class="user-role-label">Licensed Agent</div>
+          </div>
+        </div>
+        <button onclick="logout()" class="btn-icon" title="Logout" style="width: 32px; height: 32px;">🚪</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="dashboard-main">
+
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="header-search">
+          <span>🔍</span>
+          <input type="text" placeholder="Search my assigned listings...">
+        </div>
+
+        <div class="header-actions">
+          <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">🌙</button>
+          <button onclick="document.querySelector('.sidebar-item[data-tab=\'add-property\']').click()" class="btn btn-primary btn-sm">
+            ➕ Add New Property
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+
+        <!-- TAB 1: OVERVIEW -->
+        <div id="tab-pane-overview" class="tab-pane">
+          <div class="dashboard-title-row">
+            <div>
+              <h1 id="dash-greeting" class="dashboard-title">Agent Workspace 💼</h1>
+              <p class="dashboard-subtitle">Monitor assigned properties, client tours, confirmed bookings, and commission balances.</p>
+            </div>
+          </div>
+
+          <!-- KPI Grid -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Assigned Properties</div>
+                <div id="stat-my-properties" class="kpi-value">0</div>
+                <div class="kpi-trend trend-up">Under active management</div>
+              </div>
+              <div class="kpi-icon-wrap icon-blue">🏘️</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Upcoming Tours</div>
+                <div id="stat-upcoming-visits" class="kpi-value">0</div>
+                <div class="kpi-trend trend-amber">Scheduled visits</div>
+              </div>
+              <div class="kpi-icon-wrap icon-amber">📅</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Active Bookings</div>
+                <div id="stat-active-bookings" class="kpi-value">0</div>
+                <div class="kpi-trend trend-purple">Awaiting final deed</div>
+              </div>
+              <div class="kpi-icon-wrap icon-purple">📑</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Completed Sales</div>
+                <div id="stat-closed-sales" class="kpi-value">0</div>
+                <div class="kpi-trend trend-green">Closed transactions</div>
+              </div>
+              <div class="kpi-icon-wrap icon-green">🏆</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Total Commission</div>
+                <div id="stat-total-commission" class="kpi-value">₹0</div>
+                <div class="kpi-trend trend-green">Earned revenue</div>
+              </div>
+              <div class="kpi-icon-wrap icon-cyan">💰</div>
+            </div>
+          </div>
+
+          <!-- Upcoming Site Tours Table -->
+          <div class="table-card">
+            <div class="table-header-bar">
+              <span class="table-title">Upcoming Client Site Tours</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Property</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="upcoming-visits-tbody">
+                  <!-- Populated by agent.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: MY PROPERTIES -->
+        <div id="tab-pane-properties" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">My Managed Properties</h2>
+              <p class="dashboard-subtitle">Listings assigned to you as lead managing agent.</p>
+            </div>
+            <button onclick="document.querySelector('.sidebar-item[data-tab=\'add-property\']').click()" class="btn btn-primary btn-sm">
+              + Add Property
+            </button>
+          </div>
+
+          <div id="agent-properties-grid" class="property-grid">
+            <!-- Populated by agent.js -->
+          </div>
+        </div>
+
+        <!-- TAB 3: ADD PROPERTY WIZARD (5-STEP FORM) -->
+        <div id="tab-pane-add-property" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Add Property Wizard</h2>
+              <p class="dashboard-subtitle">Multi-step structured form to register a new property listing into the MySQL database.</p>
+            </div>
+          </div>
+
+          <div class="table-card" style="padding: 36px; max-width: 800px; margin: 0 auto;">
+
+            <!-- Wizard Progress Bar -->
+            <div class="wizard-progress">
+              <div class="wizard-step active">
+                <div class="wizard-step-circle">1</div>
+                <span class="wizard-step-title">Basic Info</span>
+              </div>
+              <div class="wizard-step">
+                <div class="wizard-step-circle">2</div>
+                <span class="wizard-step-title">Location</span>
+              </div>
+              <div class="wizard-step">
+                <div class="wizard-step-circle">3</div>
+                <span class="wizard-step-title">Details</span>
+              </div>
+              <div class="wizard-step">
+                <div class="wizard-step-circle">4</div>
+                <span class="wizard-step-title">Pricing & Photo</span>
+              </div>
+              <div class="wizard-step">
+                <div class="wizard-step-circle">5</div>
+                <span class="wizard-step-title">Preview & Submit</span>
+              </div>
+            </div>
+
+            <form id="form-add-property">
+
+              <!-- Step 1: Basic Information -->
+              <div class="wizard-pane active" id="wizard-pane-1">
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 20px;">Step 1: Basic Property Information</h3>
+
+                <div class="form-group">
+                  <label class="form-label">Property Title</label>
+                  <input type="text" id="wiz-title" class="form-input" placeholder="e.g. Sector 82 Luxury 3BHK Penthouse" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                  <div class="form-group">
+                    <label class="form-label">Property Category</label>
+                    <select id="wiz-type" class="form-select">
+                      <option value="1">Apartment</option>
+                      <option value="2">House</option>
+                      <option value="3">Villa</option>
+                      <option value="4">Plot</option>
+                      <option value="5">Shop</option>
+                      <option value="6">Office</option>
+                      <option value="7">Warehouse</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Listing Type</label>
+                    <select id="wiz-listing-type" class="form-select">
+                      <option value="Sale" selected>For Sale</option>
+                      <option value="Rent">For Rent</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Description & Highlights</label>
+                  <textarea id="wiz-description" class="form-textarea" rows="3" placeholder="Describe key architectural points, balconies, and amenities..."></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+                  <button type="button" class="btn btn-primary wizard-next-btn">Next: Location →</button>
+                </div>
+              </div>
+
+              <!-- Step 2: Location -->
+              <div class="wizard-pane" id="wizard-pane-2">
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 20px;">Step 2: Property Location & Address</h3>
+
+                <div class="form-group">
+                  <label class="form-label">Street Address / Society Name</label>
+                  <input type="text" id="wiz-address" class="form-input" placeholder="Flat 804, Tower C, Wave Estate" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                  <div class="form-group">
+                    <label class="form-label">City</label>
+                    <input type="text" id="wiz-city" class="form-input" placeholder="e.g. Mohali" value="Mohali" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">State</label>
+                    <input type="text" id="wiz-state" class="form-input" placeholder="e.g. Punjab" value="Punjab" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Postal Pincode</label>
+                  <input type="text" id="wiz-pincode" class="form-input" placeholder="160062" value="160062" required>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 24px;">
+                  <button type="button" class="btn btn-outline wizard-prev-btn">← Back</button>
+                  <button type="button" class="btn btn-primary wizard-next-btn">Next: Specifications →</button>
+                </div>
+              </div>
+
+              <!-- Step 3: Details -->
+              <div class="wizard-pane" id="wizard-pane-3">
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 20px;">Step 3: Architectural Specifications</h3>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                  <div class="form-group">
+                    <label class="form-label">Super Built-up Area (sq.ft)</label>
+                    <input type="number" id="wiz-area" class="form-input" placeholder="1850" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Floor Number</label>
+                    <input type="number" id="wiz-floor" class="form-input" placeholder="5" value="5">
+                  </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                  <div class="form-group">
+                    <label class="form-label">Bedrooms</label>
+                    <input type="number" id="wiz-bedrooms" class="form-input" placeholder="3" value="3">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Bathrooms</label>
+                    <input type="number" id="wiz-bathrooms" class="form-input" placeholder="3" value="3">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Assign Property Owner</label>
+                  <select id="wiz-owner" class="form-select">
+                    <option value="1">Harbhajan Brar (Owner #1 - Sector 69, Mohali)</option>
+                    <option value="2">Suresh Oberoi (Owner #2 - Sector 8, Chandigarh)</option>
+                    <option value="3">Rajendra Mittal (Owner #3 - Sector 6, Panchkula)</option>
+                    <option value="10">Gurpreet Dhillon (Owner #10 - Aerocity, Mohali)</option>
+                  </select>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 24px;">
+                  <button type="button" class="btn btn-outline wizard-prev-btn">← Back</button>
+                  <button type="button" class="btn btn-primary wizard-next-btn">Next: Pricing & Image →</button>
+                </div>
+              </div>
+
+              <!-- Step 4: Pricing & Photos -->
+              <div class="wizard-pane" id="wizard-pane-4">
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 20px;">Step 4: Pricing & Image Asset</h3>
+
+                <div class="form-group">
+                  <label class="form-label">Total Price (INR ₹)</label>
+                  <input type="number" id="wiz-price" class="form-input" placeholder="6800000" required>
+                  <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">e.g. 6800000 for ₹68 Lakhs</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Property Photo / Image</label>
+                  <div style="display: flex; gap: 12px; margin-bottom: 10px; align-items: center;">
+                    <label class="btn btn-outline btn-sm" style="cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                      📁 Upload from Computer
+                      <input type="file" id="wiz-image-file" accept="image/*" style="display: none;" onchange="handleImageFileUpload(this, 'wiz-image-url', 'wiz-image-preview')">
+                    </label>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">or paste Image URL:</span>
+                  </div>
+                  <input type="text" id="wiz-image-url" class="form-input" value="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1000&q=80" oninput="updateImagePreview('wiz-image-url', 'wiz-image-preview')">
+
+                  <!-- Live Image Preview Box -->
+                  <div style="margin-top: 12px; max-width: 280px; height: 160px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); background: var(--bg-main);">
+                    <img id="wiz-image-preview" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1000&q=80" style="width: 100%; height: 100%; object-fit: cover;">
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 24px;">
+                  <button type="button" class="btn btn-outline wizard-prev-btn">← Back</button>
+                  <button type="button" class="btn btn-primary wizard-next-btn">Review Summary →</button>
+                </div>
+              </div>
+
+              <!-- Step 5: Review & Publish -->
+              <div class="wizard-pane" id="wizard-pane-5">
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 20px;">Step 5: Review & Publish to Database</h3>
+
+                <div style="background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px; margin-bottom: 24px;">
+                  <h4 id="prev-title" style="font-size: 1.2rem; font-weight: 800; margin-bottom: 6px;">3BHK Skyline Apartment</h4>
+                  <div id="prev-location" style="color: var(--text-muted); margin-bottom: 12px;">Sector 67, Mohali</div>
+                  <div id="prev-price" style="font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 12px;">₹68,00,000</div>
+                  <div id="prev-specs" style="font-size: 0.92rem; color: var(--text-muted);">3 Beds • 2 Baths • 1,800 sqft</div>
+                </div>
+
+                <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
+                  ✓ Initial status will be set to <strong>Available</strong>.<br>
+                  ✓ The property will immediately become searchable and bookable by customers.
+                </div>
+
+                <div style="display: flex; justify-content: space-between;">
+                  <button type="button" class="btn btn-outline wizard-prev-btn">← Edit Details</button>
+                  <button type="submit" id="btn-publish-property" class="btn btn-primary">
+                    Publish Property
+                  </button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- TAB 4: VISITS -->
+        <div id="tab-pane-visits" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Client Property Visits</h2>
+              <p class="dashboard-subtitle">Appointments requested by customers for physical property inspection.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Visit ID</th>
+                    <th>Property</th>
+                    <th>Customer Name</th>
+                    <th>Appointment Slot</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="agent-visits-tbody">
+                  <!-- Populated by agent.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: BOOKINGS & FINALIZE SALE -->
+        <div id="tab-pane-bookings" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Customer Bookings & Deed Finalization</h2>
+              <p class="dashboard-subtitle">Confirmed advance deposits. Finalize the legal sale to credit your agent commission.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Property Title</th>
+                    <th>Customer</th>
+                    <th>Deposit Amount</th>
+                    <th>Booking Status</th>
+                    <th>Payment</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="agent-bookings-tbody">
+                  <!-- Populated by agent.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 6: SALES & COMMISSION -->
+        <div id="tab-pane-commission" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Sales & Agent Commission Ledger</h2>
+              <p class="dashboard-subtitle">Commission calculated automatically upon completion of sale deeds.</p>
+            </div>
+          </div>
+
+          <div class="kpi-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 24px;">
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Total Property Sales Closed</div>
+                <div id="comm-total-volume" class="kpi-value">₹0</div>
+              </div>
+              <div class="kpi-icon-wrap icon-green">🏆</div>
+            </div>
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Total Commission Credited</div>
+                <div id="comm-total-earned" class="kpi-value" style="color: var(--success);">₹0</div>
+              </div>
+              <div class="kpi-icon-wrap icon-cyan">💰</div>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Sale ID</th>
+                    <th>Property</th>
+                    <th>Buyer Name</th>
+                    <th>Date</th>
+                    <th>Sale Price</th>
+                    <th>Commission Earned</th>
+                  </tr>
+                </thead>
+                <tbody id="agent-sales-tbody">
+                  <!-- Populated by agent.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Property -->
+  <div class="modal-overlay" id="modal-edit-property">
+    <div class="modal-card" style="max-width: 650px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-size: 1.3rem; font-weight: 800;">✏️ Edit Property Details</h3>
+        <button type="button" class="btn-icon" onclick="closeModal('modal-edit-property')">✕</button>
+      </div>
+
+      <form id="form-edit-property">
+        <input type="hidden" id="edit-property-id">
+
+        <div class="form-group">
+          <label class="form-label">Property Title</label>
+          <input type="text" id="edit-title" class="form-input" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label class="form-label">Price (INR ₹)</label>
+            <input type="number" id="edit-price" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Property Status</label>
+            <select id="edit-status" class="form-select">
+              <option value="Available">Available</option>
+              <option value="Booked">Booked</option>
+              <option value="Sold">Sold</option>
+              <option value="Rented">Rented</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label class="form-label">Listing Type</label>
+            <select id="edit-listing-type" class="form-select">
+              <option value="Sale">Sale</option>
+              <option value="Rent">Rent</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Super Built-up Area (sq.ft)</label>
+            <input type="number" id="edit-area" class="form-input" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label class="form-label">Bedrooms</label>
+            <input type="number" id="edit-bedrooms" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bathrooms</label>
+            <input type="number" id="edit-bathrooms" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Floor Number</label>
+            <input type="number" id="edit-floor" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Street Address</label>
+          <input type="text" id="edit-address" class="form-input" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input type="text" id="edit-city" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">State</label>
+            <input type="text" id="edit-state" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pincode</label>
+            <input type="text" id="edit-pincode" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Property Photo / Image</label>
+          <div style="display: flex; gap: 12px; margin-bottom: 10px; align-items: center;">
+            <label class="btn btn-outline btn-sm" style="cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+              📁 Upload New Image
+              <input type="file" id="edit-image-file" accept="image/*" style="display: none;" onchange="handleImageFileUpload(this, 'edit-image-url', 'edit-image-preview')">
+            </label>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">or paste URL:</span>
+          </div>
+          <input type="text" id="edit-image-url" class="form-input" placeholder="https://..." oninput="updateImagePreview('edit-image-url', 'edit-image-preview')">
+
+          <!-- Live Image Preview Box -->
+          <div style="margin-top: 12px; max-width: 280px; height: 140px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); background: var(--bg-main);">
+            <img id="edit-image-preview" src="" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="edit-description" class="form-textarea" rows="3"></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+          <button type="button" class="btn btn-outline" onclick="closeModal('modal-edit-property')">Cancel</button>
+          <button type="submit" id="btn-save-property-edit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/agent.js"></script>
+</body>
+</html>

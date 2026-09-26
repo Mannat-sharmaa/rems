@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Local MySQL Server Binaries & Data (Keep repo lightweight)
+mysql-8.0.46-winx64/
+mysql-data/
+*.zip
+*.msi
+
+# Environment Variables & Secrets
+.env
+
+# Logs and Scratch
+*.log
+scratch/
+.system_generated/
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

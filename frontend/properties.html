@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Properties — REMS Real Estate Portal</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .properties-layout {
+      max-width: 1280px;
+      margin: 30px auto 80px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+    .filter-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 96px;
+    }
+    .filter-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .filter-group {
+      margin-bottom: 20px;
+    }
+    .filter-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .pill-btn {
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      background: var(--bg-main);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .pill-btn:hover, .pill-btn.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+    .results-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .search-input-top {
+      flex-grow: 1;
+      max-width: 400px;
+      padding: 11px 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      font-size: 0.92rem;
+      color: var(--text-main);
+      outline: none;
+    }
+    .search-input-top:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+    .pagination-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 48px;
+    }
+    @media (max-width: 900px) {
+      .properties-layout {
+        grid-template-columns: 1fr;
+      }
+      .filter-card {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="nav-logo">
+        <div class="nav-logo-icon">🏢</div>
+        <span>REMS</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/properties.html" class="nav-link active">Properties</a></li>
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme" aria-label="Toggle Theme">🌙</button>
+        <div id="nav-auth-actions" style="display: flex; align-items: center; gap: 10px;">
+          <a href="/login.html" class="btn btn-outline btn-sm">Login</a>
+          <a href="/register.html" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Properties Main Layout -->
+  <div class="properties-layout">
+
+    <!-- Left Filter Panel -->
+    <aside class="filter-card">
+      <div class="filter-title">
+        <span>Filters</span>
+        <button id="btn-reset-filters" class="btn btn-sm btn-outline" style="font-size: 0.78rem;">Reset</button>
+      </div>
+
+      <!-- City Filter -->
+      <div class="filter-group">
+        <label class="filter-label">City</label>
+        <select id="filter-city" class="form-select">
+          <option value="">All Cities</option>
+          <option value="Mohali">Mohali</option>
+          <option value="Chandigarh">Chandigarh</option>
+          <option value="Panchkula">Panchkula</option>
+          <option value="New Delhi">New Delhi</option>
+          <option value="Gurugram">Gurugram</option>
+          <option value="Mumbai">Mumbai</option>
+          <option value="Bengaluru">Bengaluru</option>
+          <option value="Pune">Pune</option>
+          <option value="Hyderabad">Hyderabad</option>
+        </select>
+      </div>
+
+      <!-- Property Type Filter -->
+      <div class="filter-group">
+        <label class="filter-label">Property Type</label>
+        <select id="filter-type" class="form-select">
+          <option value="All">All Categories</option>
+          <option value="Apartment">Apartment</option>
+          <option value="House">House</option>
+          <option value="Villa">Villa</option>
+          <option value="Plot">Plot</option>
+          <option value="Shop">Shop</option>
+          <option value="Office">Office</option>
+          <option value="Warehouse">Warehouse</option>
+        </select>
+      </div>
+
+      <!-- Listing Type -->
+      <div class="filter-group">
+        <label class="filter-label">Listing Type</label>
+        <div class="pill-group" id="pill-listing-type">
+          <button class="pill-btn active" data-val="All">All</button>
+          <button class="pill-btn" data-val="Sale">For Sale</button>
+          <button class="pill-btn" data-val="Rent">For Rent</button>
+        </div>
+      </div>
+
+      <!-- Bedrooms -->
+      <div class="filter-group">
+        <label class="filter-label">Bedrooms</label>
+        <div class="pill-group" id="pill-bedrooms">
+          <button class="pill-btn active" data-val="0">Any</button>
+          <button class="pill-btn" data-val="1">1 BHK</button>
+          <button class="pill-btn" data-val="2">2 BHK</button>
+          <button class="pill-btn" data-val="3">3 BHK</button>
+          <button class="pill-btn" data-val="4">4+ BHK</button>
+        </div>
+      </div>
+
+      <!-- Price Range -->
+      <div class="filter-group">
+        <label class="filter-label">Price Range</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <input type="number" id="filter-min-price" class="form-input" placeholder="Min ₹">
+          <input type="number" id="filter-max-price" class="form-input" placeholder="Max ₹">
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="filter-group">
+        <label class="filter-label">Availability Status</label>
+        <select id="filter-status" class="form-select">
+          <option value="Available" selected>Available Only</option>
+          <option value="Booked">Booked</option>
+          <option value="Sold">Sold</option>
+          <option value="Rented">Rented</option>
+          <option value="All">Show All Records</option>
+        </select>
+      </div>
+
+      <button id="btn-apply-filters" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+        Apply Filters
+      </button>
+    </aside>
+
+    <!-- Right Results Section -->
+    <main>
+      <div class="results-topbar">
+        <input type="text" id="search-input-main" class="search-input-top" placeholder="Search by title, address, sector...">
+
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span id="results-count-badge" style="font-weight: 700; color: var(--text-muted); font-size: 0.92rem;">
+            Loading properties...
+          </span>
+
+          <select id="sort-select" class="form-select" style="width: auto; padding: 9px 14px; font-size: 0.88rem;">
+            <option value="newest">Sort: Newest</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating-desc">Highest Rated</option>
+            <option value="area-desc">Area: Largest First</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Properties Grid -->
+      <div id="properties-results-grid" class="property-grid">
+        <!-- Rendered via properties.js -->
+      </div>
+
+      <!-- Pagination -->
+      <div id="pagination-controls" class="pagination-bar"></div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/properties.js"></script>
+</body>
+</html>

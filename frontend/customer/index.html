@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard — REMS</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="/index.html" class="sidebar-logo">
+          <div class="nav-logo-icon">🏢</div>
+          <span>REMS</span>
+        </a>
+        <span class="sidebar-badge">Customer</span>
+      </div>
+
+      <ul class="sidebar-nav">
+        <div class="nav-section-title">Menu</div>
+        <li>
+          <a href="#" class="sidebar-item active" data-tab="overview">
+            <span class="sidebar-item-icon">📊</span>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="bookings">
+            <span class="sidebar-item-icon">📑</span>
+            <span>My Bookings</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="visits">
+            <span class="sidebar-item-icon">📅</span>
+            <span>My Visits Timeline</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="payments">
+            <span class="sidebar-item-icon">💳</span>
+            <span>Payment History</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="assets">
+            <span class="sidebar-item-icon">🏡</span>
+            <span>Purchased & Rented</span>
+          </a>
+        </li>
+
+        <div class="nav-section-title">Explore</div>
+        <li>
+          <a href="/properties.html" class="sidebar-item">
+            <span class="sidebar-item-icon">🔍</span>
+            <span>Search Properties</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div id="dash-user-avatar" class="user-avatar">M</div>
+          <div class="user-info-text">
+            <div id="dash-user-name" class="user-name">Mannat Sharma</div>
+            <div class="user-role-label">Customer</div>
+          </div>
+        </div>
+        <button onclick="logout()" class="btn-icon" title="Logout" style="width: 32px; height: 32px;">🚪</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="dashboard-main">
+
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="header-search">
+          <span>🔍</span>
+          <input type="text" placeholder="Search my visits, bookings...">
+        </div>
+
+        <div class="header-actions">
+          <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">🌙</button>
+          <a href="/properties.html" class="btn btn-primary btn-sm">+ Find New Homes</a>
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <div class="dashboard-content">
+
+        <!-- TAB 1: OVERVIEW -->
+        <div id="tab-pane-overview" class="tab-pane">
+          <div class="dashboard-title-row">
+            <div>
+              <h1 id="dash-greeting" class="dashboard-title">Welcome Back 👋</h1>
+              <p class="dashboard-subtitle">Track your property tours, advance reservations, and transactional receipts in real-time.</p>
+            </div>
+          </div>
+
+          <!-- KPI Grid -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">My Bookings</div>
+                <div id="stat-bookings-count" class="kpi-value">0</div>
+                <div class="kpi-trend trend-up">Active reservations</div>
+              </div>
+              <div class="kpi-icon-wrap icon-blue">📑</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Upcoming Visits</div>
+                <div id="stat-visits-count" class="kpi-value">0</div>
+                <div class="kpi-trend trend-neutral">Physical site tours</div>
+              </div>
+              <div class="kpi-icon-wrap icon-amber">📅</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Total Spent</div>
+                <div id="stat-total-spent" class="kpi-value">₹0</div>
+                <div class="kpi-trend trend-green">Settled payments</div>
+              </div>
+              <div class="kpi-icon-wrap icon-green">💳</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Properties Owned / Rented</div>
+                <div id="stat-properties-owned" class="kpi-value">0</div>
+                <div class="kpi-trend trend-purple">Active holdings</div>
+              </div>
+              <div class="kpi-icon-wrap icon-purple">🏡</div>
+            </div>
+          </div>
+
+          <!-- Next Upcoming Visit Alert Box -->
+          <div id="dash-next-visit-box">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Recommended Properties Grid -->
+          <div class="dashboard-title-row" style="margin-top: 36px; margin-bottom: 18px;">
+            <h3 style="font-size: 1.25rem; font-weight: 800;">Recommended Available Properties</h3>
+            <a href="/properties.html" style="font-size: 0.88rem; color: var(--primary); font-weight: 700;">Explore All →</a>
+          </div>
+          <div id="dash-recommendations-grid" class="property-grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- TAB 2: MY BOOKINGS -->
+        <div id="tab-pane-bookings" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">My Bookings Ledger</h2>
+              <p class="dashboard-subtitle">Atomic reservation records with transaction ID and status tracking.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Property Title</th>
+                    <th>Date</th>
+                    <th>Booking Token</th>
+                    <th>Booking Status</th>
+                    <th>Payment Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="bookings-table-body">
+                  <!-- Loaded by customer.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: MY VISITS (TIMELINE STYLE) -->
+        <div id="tab-pane-visits" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">My Property Tours Timeline</h2>
+              <p class="dashboard-subtitle">Track your upcoming and historical physical site appointments.</p>
+            </div>
+          </div>
+
+          <div id="visits-timeline-container" style="max-width: 800px; margin-top: 20px;">
+            <!-- Loaded by customer.js -->
+          </div>
+        </div>
+
+        <!-- TAB 4: PAYMENTS -->
+        <div id="tab-pane-payments" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Payment Transaction History</h2>
+              <p class="dashboard-subtitle">Ledger of all advance deposits and token payments with unique transaction IDs.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Transaction ID</th>
+                    <th>Property</th>
+                    <th>Payment Date</th>
+                    <th>Method</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="payments-table-body">
+                  <!-- Loaded by customer.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: PURCHASED & RENTED ASSETS -->
+        <div id="tab-pane-assets" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">My Acquired Properties</h2>
+              <p class="dashboard-subtitle">Purchased titles and active rental agreements under your name.</p>
+            </div>
+          </div>
+
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 16px;">Finalized Home Purchases</h3>
+          <div id="purchased-properties-grid" class="property-grid" style="margin-bottom: 40px;">
+            <!-- Loaded by customer.js -->
+          </div>
+
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 16px;">Active Rental Leases</h3>
+          <div id="rented-properties-grid" class="property-grid">
+            <!-- Loaded by customer.js -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/customer.js"></script>
+</body>
+</html>

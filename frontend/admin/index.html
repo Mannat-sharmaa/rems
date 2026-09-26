@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Central — REMS Management System</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="/index.html" class="sidebar-logo">
+          <div class="nav-logo-icon">🏢</div>
+          <span>REMS</span>
+        </a>
+        <span class="sidebar-badge" style="background: rgba(239, 68, 68, 0.15); color: var(--danger);">Admin</span>
+      </div>
+
+      <ul class="sidebar-nav">
+        <div class="nav-section-title">Overview</div>
+        <li>
+          <a href="#" class="sidebar-item active" data-tab="overview">
+            <span class="sidebar-item-icon">📊</span>
+            <span>System Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="properties">
+            <span class="sidebar-item-icon">🏘️</span>
+            <span>Properties</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="users">
+            <span class="sidebar-item-icon">👥</span>
+            <span>Users & Roles</span>
+          </a>
+        </li>
+
+        <div class="nav-section-title">Financial Ledgers</div>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="bookings">
+            <span class="sidebar-item-icon">📑</span>
+            <span>All Bookings</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="payments">
+            <span class="sidebar-item-icon">💳</span>
+            <span>Payments Ledger</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="sales">
+            <span class="sidebar-item-icon">🏆</span>
+            <span>Sales & Deeds</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="rentals">
+            <span class="sidebar-item-icon">🏢</span>
+            <span>Rentals & Leases</span>
+          </a>
+        </li>
+
+        <div class="nav-section-title">DBMS Tools</div>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="reports">
+            <span class="sidebar-item-icon">📈</span>
+            <span>12 Analytical Reports</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="sql-console">
+            <span class="sidebar-item-icon">💻</span>
+            <span>Interactive SQL Console</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-item" data-tab="reviews">
+            <span class="sidebar-item-icon">⭐</span>
+            <span>Ratings & Reviews</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div class="user-avatar" style="background: var(--danger);">A</div>
+          <div class="user-info-text">
+            <div class="user-name">System Administrator</div>
+            <div class="user-role-label">Root Admin</div>
+          </div>
+        </div>
+        <button onclick="logout()" class="btn-icon" title="Logout" style="width: 32px; height: 32px;">🚪</button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="dashboard-main">
+
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="header-search">
+          <span>🔍</span>
+          <input type="text" placeholder="Global search across all records...">
+        </div>
+
+        <div class="header-actions">
+          <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">🌙</button>
+          <a href="/index.html" class="btn btn-outline btn-sm">Public Portal ↗</a>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+
+        <!-- TAB 1: SYSTEM ANALYTICS & OVERVIEW -->
+        <div id="tab-pane-overview" class="tab-pane">
+          <div class="dashboard-title-row">
+            <div>
+              <h1 class="dashboard-title">System-Wide Executive Dashboard 📊</h1>
+              <p class="dashboard-subtitle">Real-time telemetry and transactional statistics directly connected to MySQL database.</p>
+            </div>
+          </div>
+
+          <!-- 12 KPI Metric Cards Grid -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Total Properties</div>
+                <div id="kpi-total-properties" class="kpi-value">0</div>
+                <div class="kpi-trend trend-neutral">In Database</div>
+              </div>
+              <div class="kpi-icon-wrap icon-blue">🏘️</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Available</div>
+                <div id="kpi-available-properties" class="kpi-value" style="color: var(--success);">0</div>
+                <div class="kpi-trend trend-up">Ready for booking</div>
+              </div>
+              <div class="kpi-icon-wrap icon-green">✓</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Booked</div>
+                <div id="kpi-booked-properties" class="kpi-value" style="color: var(--warning);">0</div>
+                <div class="kpi-trend trend-amber">Token received</div>
+              </div>
+              <div class="kpi-icon-wrap icon-amber">🔒</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Sold</div>
+                <div id="kpi-sold-properties" class="kpi-value" style="color: var(--danger);">0</div>
+                <div class="kpi-trend trend-neutral">Title transferred</div>
+              </div>
+              <div class="kpi-icon-wrap icon-purple">🏷️</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Rented</div>
+                <div id="kpi-rented-properties" class="kpi-value">0</div>
+                <div class="kpi-trend trend-neutral">Active occupancy</div>
+              </div>
+              <div class="kpi-icon-wrap icon-cyan">🏢</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Total Customers</div>
+                <div id="kpi-total-customers" class="kpi-value">0</div>
+                <div class="kpi-trend trend-up">Registered buyers</div>
+              </div>
+              <div class="kpi-icon-wrap icon-blue">👤</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Active Agents</div>
+                <div id="kpi-total-agents" class="kpi-value">0</div>
+                <div class="kpi-trend trend-neutral">Brokers on platform</div>
+              </div>
+              <div class="kpi-icon-wrap icon-amber">💼</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Property Owners</div>
+                <div id="kpi-total-owners" class="kpi-value">0</div>
+                <div class="kpi-trend trend-neutral">Landlords & Sellers</div>
+              </div>
+              <div class="kpi-icon-wrap icon-green">🔑</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Total Bookings</div>
+                <div id="kpi-total-bookings" class="kpi-value">0</div>
+                <div class="kpi-trend trend-up">All-time bookings</div>
+              </div>
+              <div class="kpi-icon-wrap icon-purple">📑</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Total Sales</div>
+                <div id="kpi-total-sales" class="kpi-value">0</div>
+                <div class="kpi-trend trend-green">Deeds finalized</div>
+              </div>
+              <div class="kpi-icon-wrap icon-cyan">🏆</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Total Revenue Collected</div>
+                <div id="kpi-total-revenue" class="kpi-value" style="color: var(--success); font-size: 1.6rem;">₹0</div>
+                <div class="kpi-trend trend-green">Gross volume</div>
+              </div>
+              <div class="kpi-icon-wrap icon-green">💰</div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <div class="kpi-label">Pending Payments</div>
+                <div id="kpi-pending-payments" class="kpi-value" style="color: var(--warning);">0</div>
+                <div class="kpi-trend trend-amber">Awaiting clearance</div>
+              </div>
+              <div class="kpi-icon-wrap icon-amber">⏳</div>
+            </div>
+          </div>
+
+          <!-- Charts Visualizations Grid -->
+          <div class="charts-grid">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <span class="chart-card-title">Properties by City Distribution</span>
+              </div>
+              <canvas id="chart-properties-city" height="120"></canvas>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <span class="chart-card-title">Properties by Type</span>
+              </div>
+              <canvas id="chart-properties-type" height="180"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card" style="margin-bottom: 32px;">
+            <div class="chart-card-header">
+              <span class="chart-card-title">Monthly Closed Sales Revenue Trend (₹)</span>
+            </div>
+            <canvas id="chart-monthly-sales" height="90"></canvas>
+          </div>
+        </div>
+
+        <!-- TAB 2: PROPERTIES MANAGEMENT -->
+        <div id="tab-pane-properties" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">System Properties Master Ledger</h2>
+              <p class="dashboard-subtitle">Manage, verify, and delete property listings across all cities.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Property ID</th>
+                    <th>Title & Location</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Managing Agent</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-properties-tbody">
+                  <!-- Populated by admin.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: USERS & ROLES -->
+        <div id="tab-pane-users" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">User Accounts & Roles</h2>
+              <p class="dashboard-subtitle">Role-based access accounts stored with bcrypt hashed passwords.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Member Since</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-users-tbody">
+                  <!-- Populated by admin.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: BOOKINGS -->
+        <div id="tab-pane-bookings" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Master Bookings Ledger</h2>
+              <p class="dashboard-subtitle">All customer reservations processed through database transactions.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Property</th>
+                    <th>Customer</th>
+                    <th>Agent</th>
+                    <th>Token Deposit</th>
+                    <th>Booking Status</th>
+                    <th>Payment Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-bookings-tbody">
+                  <!-- Populated by admin.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: PAYMENTS -->
+        <div id="tab-pane-payments" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Payments Audit Trail</h2>
+              <p class="dashboard-subtitle">Every monetary transaction recorded with unique TXN reference ID.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Transaction ID</th>
+                    <th>Property</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Method</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-payments-tbody">
+                  <!-- Populated by admin.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 6: SALES -->
+        <div id="tab-pane-sales" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Closed Property Sales</h2>
+              <p class="dashboard-subtitle">Finalized property deeds and calculated broker commissions.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Sale ID</th>
+                    <th>Property</th>
+                    <th>Buyer</th>
+                    <th>Agent</th>
+                    <th>Sale Date</th>
+                    <th>Final Sale Price</th>
+                    <th>Commission Paid</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-sales-tbody">
+                  <!-- Populated by admin.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 7: RENTALS -->
+        <div id="tab-pane-rentals" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Rental Agreements Ledger</h2>
+              <p class="dashboard-subtitle">Active and expired residential & commercial leases.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Rental ID</th>
+                    <th>Property</th>
+                    <th>Tenant</th>
+                    <th>Agent</th>
+                    <th>Lease Period</th>
+                    <th>Monthly Rent</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-rentals-tbody">
+                  <!-- Populated by admin.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 8: ANALYTICAL REPORTS -->
+        <div id="tab-pane-reports" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Analytical DBMS Reports</h2>
+              <p class="dashboard-subtitle">Dynamic reports powered by SQL views, multi-table joins, and aggregate functions.</p>
+            </div>
+            <button onclick="window.print()" class="btn btn-outline btn-sm">🖨️ Print / Export PDF</button>
+          </div>
+
+          <!-- Report Selector -->
+          <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <label style="font-weight: 700; font-size: 0.92rem;">Select Report Type:</label>
+            <select id="report-type-select" class="form-select" style="max-width: 380px;">
+              <option value="available-properties">1. Available Properties Report</option>
+              <option value="sold-properties">2. Sold Properties Report</option>
+              <option value="rented-properties">3. Rented Properties Report</option>
+              <option value="properties-by-city">4. Properties by City Aggregation</option>
+              <option value="properties-by-type">5. Properties by Category Distribution</option>
+              <option value="customer-booking-history">6. Customer Booking History Ledger</option>
+              <option value="agent-performance">7. Agent Performance & Productivity</option>
+              <option value="monthly-revenue">8. Monthly Revenue Collections</option>
+              <option value="pending-payments">9. Pending Payments Ledger</option>
+              <option value="sales-report">10. Closed Property Sales Report</option>
+              <option value="rental-report">11. Rental Agreements & Occupancy</option>
+              <option value="commission-report">12. Agent Commission Disbursal</option>
+            </select>
+          </div>
+
+          <!-- Report Display Table -->
+          <div class="table-card">
+            <div class="table-header-bar">
+              <span id="report-title-display" class="table-title">Available Properties Report</span>
+              <span id="report-count-badge" class="badge badge-info">0 Records</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead id="report-table-thead"></thead>
+                <tbody id="report-table-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 9: INTERACTIVE DBMS SQL CONSOLE -->
+        <div id="tab-pane-sql-console" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Interactive DBMS SQL Console 💻</h2>
+              <p class="dashboard-subtitle">Demonstrate all 32 college project SQL queries live to evaluators and professors.</p>
+            </div>
+          </div>
+
+          <div class="sql-console-wrap">
+            <div class="sql-console-header">
+              <label style="font-weight: 700; font-size: 0.88rem; color: #94a3b8;">Choose Demonstration Query:</label>
+              <select id="sql-catalog-select" class="sql-query-select"></select>
+            </div>
+
+            <textarea id="sql-editor-textarea" class="sql-editor-textarea" spellcheck="false"></textarea>
+
+            <div class="sql-meta-bar">
+              <button type="button" id="btn-run-sql" class="btn btn-primary btn-sm">
+                ▶ Execute SQL Query
+              </button>
+              <span id="sql-execution-time">⏱ Execution Time: —</span>
+              <span id="sql-row-count">📊 Rows: —</span>
+            </div>
+          </div>
+
+          <!-- SQL Result Table -->
+          <div class="table-card">
+            <div class="table-header-bar">
+              <span class="table-title">Live Result Set</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead id="sql-result-thead"></thead>
+                <tbody id="sql-result-tbody">
+                  <tr><td colspan="10" style="text-align: center; padding: 24px; color: var(--text-muted);">Select a query and click "Execute SQL Query" to view live MySQL output.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 10: REVIEWS -->
+        <div id="tab-pane-reviews" class="tab-pane" style="display: none;">
+          <div class="dashboard-title-row">
+            <div>
+              <h2 class="dashboard-title">Customer Reviews & Ratings</h2>
+              <p class="dashboard-subtitle">Monitor ratings and moderate user feedback.</p>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Review ID</th>
+                    <th>Property</th>
+                    <th>Customer</th>
+                    <th>Rating</th>
+                    <th>Review Content</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-reviews-tbody">
+                  <!-- Populated by admin.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Property (Admin) -->
+  <div class="modal-overlay" id="modal-edit-property">
+    <div class="modal-card" style="max-width: 650px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-size: 1.3rem; font-weight: 800;">✏️ Edit Property Details</h3>
+        <button type="button" class="btn-icon" onclick="closeModal('modal-edit-property')">✕</button>
+      </div>
+
+      <form id="form-edit-property">
+        <input type="hidden" id="edit-property-id">
+
+        <div class="form-group">
+          <label class="form-label">Property Title</label>
+          <input type="text" id="edit-title" class="form-input" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label class="form-label">Price (INR ₹)</label>
+            <input type="number" id="edit-price" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Property Status</label>
+            <select id="edit-status" class="form-select">
+              <option value="Available">Available</option>
+              <option value="Booked">Booked</option>
+              <option value="Sold">Sold</option>
+              <option value="Rented">Rented</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label class="form-label">Listing Type</label>
+            <select id="edit-listing-type" class="form-select">
+              <option value="Sale">Sale</option>
+              <option value="Rent">Rent</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Super Built-up Area (sq.ft)</label>
+            <input type="number" id="edit-area" class="form-input" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label class="form-label">Bedrooms</label>
+            <input type="number" id="edit-bedrooms" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Bathrooms</label>
+            <input type="number" id="edit-bathrooms" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Floor Number</label>
+            <input type="number" id="edit-floor" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Street Address</label>
+          <input type="text" id="edit-address" class="form-input" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input type="text" id="edit-city" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">State</label>
+            <input type="text" id="edit-state" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pincode</label>
+            <input type="text" id="edit-pincode" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Property Photo / Image</label>
+          <div style="display: flex; gap: 12px; margin-bottom: 10px; align-items: center;">
+            <label class="btn btn-outline btn-sm" style="cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+              📁 Upload New Image
+              <input type="file" id="edit-image-file" accept="image/*" style="display: none;" onchange="handleImageFileUpload(this, 'edit-image-url', 'edit-image-preview')">
+            </label>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">or paste URL:</span>
+          </div>
+          <input type="text" id="edit-image-url" class="form-input" placeholder="https://..." oninput="updateImagePreview('edit-image-url', 'edit-image-preview')">
+
+          <!-- Live Image Preview Box -->
+          <div style="margin-top: 12px; max-width: 280px; height: 140px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); background: var(--bg-main);">
+            <img id="edit-image-preview" src="" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="edit-description" class="form-textarea" rows="3"></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+          <button type="button" class="btn btn-outline" onclick="closeModal('modal-edit-property')">Cancel</button>
+          <button type="submit" id="btn-save-property-edit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

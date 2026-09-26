@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REMS — Modern Real Estate Management System</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="nav-logo">
+        <div class="nav-logo-icon">🏢</div>
+        <span>REMS</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/index.html" class="nav-link active">Home</a></li>
+        <li><a href="/properties.html" class="nav-link">Properties</a></li>
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme" aria-label="Toggle Theme">🌙</button>
+        <div id="nav-auth-actions" style="display: flex; align-items: center; gap: 10px;">
+          <!-- Dynamically populated by api.js -->
+          <a href="/login.html" class="btn btn-outline btn-sm">Login</a>
+          <a href="/register.html" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMobileNav()">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <canvas id="hero-3d-canvas" class="hero-bg-canvas"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span>✨</span> Premier Real Estate Platform
+      </div>
+
+      <h1 class="hero-title">
+        Find a Place You’ll Love to <span class="gradient-text">Call Home.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Discover verified luxury apartments, duplexes, and commercial properties for sale and rent. Schedule physical site visits, book properties in real-time, and track transactions seamlessly.
+      </p>
+
+      <!-- Hero Search Form -->
+      <form class="hero-search-box" action="/properties.html" method="GET">
+        <div class="search-field">
+          <label class="search-label"><span>📍</span> Location</label>
+          <input type="text" name="city" class="search-input" placeholder="e.g. Mohali, Chandigarh..." value="Mohali">
+        </div>
+
+        <div class="search-field">
+          <label class="search-label"><span>🏠</span> Property Type</label>
+          <select name="type" class="search-select">
+            <option value="All">All Types</option>
+            <option value="Apartment" selected>Apartment</option>
+            <option value="House">House</option>
+            <option value="Villa">Villa</option>
+            <option value="Plot">Plot</option>
+            <option value="Shop">Shop</option>
+            <option value="Office">Office</option>
+          </select>
+        </div>
+
+        <div class="search-field">
+          <label class="search-label"><span>🏷️</span> Buy / Rent</label>
+          <select name="listingType" class="search-select">
+            <option value="All">All</option>
+            <option value="Sale" selected>Buy (Sale)</option>
+            <option value="Rent">Rent</option>
+          </select>
+        </div>
+
+        <div class="search-field">
+          <label class="search-label"><span>💰</span> Max Budget</label>
+          <select name="maxPrice" class="search-select">
+            <option value="">Any Price</option>
+            <option value="5000000">Below ₹50 Lakh</option>
+            <option value="7000000" selected>Below ₹70 Lakh</option>
+            <option value="10000000">Below ₹1 Crore</option>
+            <option value="20000000">Below ₹2 Crore</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary hero-search-btn" style="height: 100%;">
+          <span>🔍</span> Search
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Statistics Counters -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number" data-target="1248" data-suffix="+">0</div>
+        <div class="stat-label">Total Properties Managed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="642" data-suffix="+">0</div>
+        <div class="stat-label">Verified Available Homes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="382" data-suffix="+">0</div>
+        <div class="stat-label">Successful Closed Sales</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="4.8" data-suffix=" / 5">0</div>
+        <div class="stat-label">Customer Satisfaction Rating</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Properties Section -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-badge">Exclusive Listings</span>
+        <h2 class="section-title">Featured Luxury Properties</h2>
+        <p class="section-desc">Hand-picked residential apartments, independent villas, and commercial hubs ready for immediate possession.</p>
+      </div>
+      <a href="/properties.html" class="btn btn-outline">View All Listings →</a>
+    </div>
+
+    <!-- Properties Grid Container -->
+    <div id="featured-properties-grid" class="property-grid">
+      <!-- Loading Skeletons -->
+      <div class="property-card skeleton" style="height: 420px;"></div>
+      <div class="property-card skeleton" style="height: 420px;"></div>
+      <div class="property-card skeleton" style="height: 420px;"></div>
+    </div>
+  </section>
+
+  <!-- Cinematic Featured Banner -->
+  <section class="section" style="padding-top: 0;">
+    <div class="featured-banner">
+      <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80"
+           alt="Chandigarh Royale Heritage Villa" class="featured-banner-img">
+      <div class="featured-banner-body">
+        <span class="featured-banner-tag">Spotlight Residence</span>
+        <h3 class="featured-banner-title">Chandigarh Royale Heritage Villa</h3>
+        <p style="color: #94a3b8; font-size: 1rem; line-height: 1.6; margin-bottom: 24px;">
+          Exclusive French-colonial villa with a landscaped garden, private plunge pool, and home theater setup in a serene VIP sector overlooking the Shivalik foothills.
+        </p>
+        <div class="featured-banner-price">₹1.25 Crore</div>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="/property-details.html?id=102" class="btn btn-primary">
+            Explore Property Details →
+          </a>
+          <a href="/property-details.html?id=102&action=visit" class="btn btn-outline" style="border-color: rgba(255,255,255,0.25); color: #ffffff;">
+            Schedule Site Visit
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Locations Section -->
+  <section class="section" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-badge">Prime Locations</span>
+        <h2 class="section-title">Explore by City</h2>
+        <p class="section-desc">Browse residential and commercial hubs across major metropolitan regions.</p>
+      </div>
+    </div>
+
+    <div id="popular-cities-grid" class="cities-grid">
+      <!-- Dynamically filled by main.js -->
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="section">
+    <div class="section-header" style="text-align: center; display: block; margin-bottom: 50px;">
+      <span class="section-badge">Our Advantage</span>
+      <h2 class="section-title">Why Buyers & Tenants Choose REMS</h2>
+      <p class="section-desc" style="max-width: 600px; margin: 8px auto 0;">Engineered for transparency, speed, and legally verified property acquisitions.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px;">
+      <div class="property-card" style="padding: 32px;">
+        <div class="kpi-icon-wrap icon-blue" style="margin-bottom: 18px;">🛡️</div>
+        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;">100% Verified Titles</h3>
+        <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+          Every listed property undergoes rigorous legal title verification and municipal approval validation before public availability.
+        </p>
+      </div>
+
+      <div class="property-card" style="padding: 32px;">
+        <div class="kpi-icon-wrap icon-green" style="margin-bottom: 18px;">🤝</div>
+        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;">Direct Agent Support</h3>
+        <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+          Work with experienced, licensed real-estate agents dedicated to site tours, price negotiations, and paper deed registration.
+        </p>
+      </div>
+
+      <div class="property-card" style="padding: 32px;">
+        <div class="kpi-icon-wrap icon-cyan" style="margin-bottom: 18px;">⚡</div>
+        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;">Atomic Online Booking</h3>
+        <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+          Reserve your desired property with our database transaction engine that prevents double-booking and issues instant receipts.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>REMS Real Estate</h3>
+        <p style="line-height: 1.6; margin-bottom: 18px; max-width: 320px;">
+          Next-generation Real Estate Management System built as a comprehensive 5th semester B.Tech AI & DS DBMS project.
+        </p>
+        <div style="font-size: 0.85rem; color: #64748b;">
+          Database: MySQL 8 / MariaDB (Normalized 3NF Relational Schema)
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/properties.html">Search Properties</a></li>
+          <li><a href="/about.html">About Project</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Portals</h4>
+        <ul class="footer-links">
+          <li><a href="/customer/index.html">Customer Dashboard</a></li>
+          <li><a href="/agent/index.html">Agent Workspace</a></li>
+          <li><a href="/admin/index.html">Admin Central</a></li>
+          <li><a href="/login.html">Sign In</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Demo Accounts</h4>
+        <div style="font-size: 0.85rem; display: flex; flex-direction: column; gap: 8px;">
+          <div><strong style="color: #fff;">Admin:</strong> admin@rems.com (admin123)</div>
+          <div><strong style="color: #fff;">Agent:</strong> rahul.agent@rems.com (password123)</div>
+          <div><strong style="color: #fff;">Customer:</strong> mannat@example.com (password123)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 REMS — Real Estate Management System. All rights reserved.</div>
+      <div>5th Sem B.Tech AI & DS DBMS Project</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

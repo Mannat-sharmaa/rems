@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Details — REMS</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .details-container {
+      max-width: 1240px;
+      margin: 20px auto 80px;
+      padding: 0 24px;
+    }
+    .breadcrumb-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+      height: 480px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 36px;
+      box-shadow: var(--shadow-md);
+    }
+    .main-gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+    .main-gallery-img:hover {
+      transform: scale(1.02);
+    }
+    .sub-gallery-column {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      height: 100%;
+    }
+    .sub-gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+    .sub-gallery-img:hover {
+      transform: scale(1.02);
+    }
+    .details-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      align-items: start;
+    }
+    .spec-badge-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 28px 0;
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .spec-badge-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .spec-badge-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .spec-badge-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .amenity-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+    .sticky-booking-sidebar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      position: sticky;
+      top: 96px;
+    }
+    .star-rating {
+      color: #f59e0b;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 960px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        height: 320px;
+      }
+      .sub-gallery-column {
+        display: none;
+      }
+      .details-content-grid {
+        grid-template-columns: 1fr;
+      }
+      .spec-badge-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .sticky-booking-sidebar {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="nav-logo">
+        <div class="nav-logo-icon">🏢</div>
+        <span>REMS</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/properties.html" class="nav-link active">Properties</a></li>
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">🌙</button>
+        <div id="nav-auth-actions" style="display: flex; align-items: center; gap: 10px;">
+          <a href="/login.html" class="btn btn-outline btn-sm">Login</a>
+          <a href="/register.html" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Details Content Container -->
+  <div class="details-container">
+    <div class="breadcrumb-bar">
+      <a href="/index.html">Home</a> <span>›</span>
+      <a href="/properties.html">Properties</a> <span>›</span>
+      <span id="breadcrumb-title" style="color: var(--text-main); font-weight: 600;">Loading...</span>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="gallery-grid">
+      <img id="details-main-img" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80" alt="Property Image" class="main-gallery-img">
+      <div class="sub-gallery-column">
+        <img id="details-sub-img-1" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="Property interior" class="sub-gallery-img">
+        <img id="details-sub-img-2" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Property living room" class="sub-gallery-img">
+      </div>
+    </div>
+
+    <!-- Two-column content & Booking panel -->
+    <div class="details-content-grid">
+
+      <!-- Left Column: Specs & Description -->
+      <div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+          <span id="details-type-badge" class="badge badge-info">Apartment</span>
+          <span id="details-status-badge" class="badge badge-success">Available</span>
+          <span id="details-listing-badge" class="badge badge-neutral">For Sale</span>
+        </div>
+
+        <h1 id="details-title" style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.8px; margin-bottom: 8px;">
+          Loading Property Title...
+        </h1>
+
+        <div style="display: flex; align-items: center; gap: 16px; color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">
+          <span id="details-location">📍 Sector 67, Mohali, Punjab</span>
+          <span>•</span>
+          <div style="display: flex; align-items: center; gap: 4px;">
+            <span class="star-rating">★</span>
+            <strong id="details-avg-rating" style="color: var(--text-main);">4.8</strong>
+            <span id="details-reviews-count">(24 Reviews)</span>
+          </div>
+        </div>
+
+        <!-- Specs Badge Grid -->
+        <div class="spec-badge-grid">
+          <div class="spec-badge-item">
+            <span class="spec-badge-label">Bedrooms</span>
+            <span id="spec-bedrooms" class="spec-badge-value">3 BHK</span>
+          </div>
+          <div class="spec-badge-item">
+            <span class="spec-badge-label">Bathrooms</span>
+            <span id="spec-bathrooms" class="spec-badge-value">2 Baths</span>
+          </div>
+          <div class="spec-badge-item">
+            <span class="spec-badge-label">Super Area</span>
+            <span id="spec-area" class="spec-badge-value">1,800 sq.ft</span>
+          </div>
+          <div class="spec-badge-item">
+            <span class="spec-badge-label">Floor</span>
+            <span id="spec-floor" class="spec-badge-value">5th Floor</span>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div style="margin-bottom: 36px;">
+          <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 14px;">About This Property</h2>
+          <p id="details-description" style="color: var(--text-muted); line-height: 1.7; font-size: 1.02rem;">
+            Loading property description...
+          </p>
+        </div>
+
+        <!-- Amenities -->
+        <div style="margin-bottom: 40px;">
+          <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 14px;">Key Amenities & Features</h2>
+          <div class="amenities-grid">
+            <div class="amenity-chip"><span>🚗</span> Covered Car Parking</div>
+            <div class="amenity-chip"><span>🛡️</span> 24/7 Gated Security</div>
+            <div class="amenity-chip"><span>🏊</span> Swimming Pool</div>
+            <div class="amenity-chip"><span>🏋️</span> Clubhouse & Gym</div>
+            <div class="amenity-chip"><span>⚡</span> 100% Power Backup</div>
+            <div class="amenity-chip"><span>🛗</span> High-Speed Lifts</div>
+            <div class="amenity-chip"><span>🌳</span> Landscaped Gardens</div>
+            <div class="amenity-chip"><span>📶</span> Fiber Optic Internet</div>
+          </div>
+        </div>
+
+        <!-- Assigned Real Estate Agent Card -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 26px; margin-bottom: 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div id="agent-avatar" class="user-avatar" style="width: 54px; height: 54px; font-size: 1.3rem;">R</div>
+            <div>
+              <div style="font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">Assigned Professional Agent</div>
+              <h3 id="agent-name" style="font-size: 1.15rem; font-weight: 800; margin: 2px 0;">Rahul Sharma</h3>
+              <div id="agent-exp" style="font-size: 0.85rem; color: var(--text-muted);">7 Years Experience • Licensed Real Estate Advisor</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <a id="btn-call-agent" href="tel:+919876511001" class="btn btn-outline btn-sm">📞 Call Agent</a>
+            <button onclick="openScheduleVisitModal()" class="btn btn-primary btn-sm">Schedule Visit</button>
+          </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div style="margin-top: 48px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <h2 style="font-size: 1.35rem; font-weight: 800;">Customer Reviews & Ratings</h2>
+            <button onclick="openReviewModal()" class="btn btn-outline btn-sm">✍️ Write a Review</button>
+          </div>
+
+          <div id="reviews-list-container" style="display: flex; flex-direction: column; gap: 18px;">
+            <!-- Rendered by property-details.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Sticky Booking / Pricing Box -->
+      <aside class="sticky-booking-sidebar">
+        <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; margin-bottom: 6px;">Total Price</div>
+        <div id="sidebar-price" style="font-size: 2.2rem; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 18px;">
+          ₹65,00,000
+        </div>
+
+        <div style="background: var(--bg-main); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 24px; font-size: 0.88rem; display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--text-muted);">Booking Deposit:</span>
+            <strong id="sidebar-token-amount">₹5,00,000</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--text-muted);">Title Status:</span>
+            <span style="color: var(--success); font-weight: 700;">Verified & Ready</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--text-muted);">Possession:</span>
+            <strong>Immediate</strong>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <button id="btn-book-now" onclick="openBookingModal()" class="btn btn-primary btn-lg" style="width: 100%;">
+            ⚡ Book Property Now
+          </button>
+          <button onclick="openScheduleVisitModal()" class="btn btn-outline btn-lg" style="width: 100%;">
+            📅 Schedule Physical Visit
+          </button>
+        </div>
+
+        <div style="margin-top: 24px; text-align: center; font-size: 0.82rem; color: var(--text-light); line-height: 1.5;">
+          🔒 Secure DBMS atomic transaction with rollback protection. Double-booking strictly prevented.
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 1: SCHEDULE VISIT MODAL
+       ============================================================ -->
+  <div id="modal-schedule-visit" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeModal('modal-schedule-visit')">✕</button>
+      <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;">Schedule Property Visit</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">
+        Pick your preferred date and time to inspect the property in person with our assigned agent.
+      </p>
+
+      <form id="form-schedule-visit" onsubmit="handleScheduleVisitSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Preferred Date</label>
+          <input type="date" id="visit-date-input" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Preferred Time Slot</label>
+          <select id="visit-time-input" class="form-select" required>
+            <option value="10:00:00">10:00 AM (Morning)</option>
+            <option value="11:00:00" selected>11:00 AM (Morning)</option>
+            <option value="14:00:00">02:00 PM (Afternoon)</option>
+            <option value="16:00:00">04:00 PM (Evening)</option>
+            <option value="17:30:00">05:30 PM (Evening)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Special Requests / Remarks</label>
+          <textarea id="visit-remarks-input" class="form-textarea" rows="3" placeholder="e.g. Please bring society maintenance ledger..."></textarea>
+        </div>
+
+        <button type="submit" id="btn-submit-visit" class="btn btn-primary" style="width: 100%;">
+          Confirm Appointment
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 2: BOOKING & PAYMENT WORKFLOW MODAL
+       ============================================================ -->
+  <div id="modal-booking-payment" class="modal-overlay">
+    <div class="modal-card" style="max-width: 600px;">
+      <button class="modal-close-btn" onclick="closeModal('modal-booking-payment')">✕</button>
+
+      <!-- Step 1: Summary -->
+      <div id="booking-step-summary">
+        <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;">Confirm Property Booking</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+          Review reservation details before proceeding to payment gateway simulation.
+        </p>
+
+        <div style="background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span style="color: var(--text-muted);">Property:</span>
+            <strong id="booking-modal-prop-title">3BHK Luxury Skyline Apartment</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span style="color: var(--text-muted);">Location:</span>
+            <strong id="booking-modal-prop-city">Mohali, Punjab</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <span style="color: var(--text-muted);">Full Property Price:</span>
+            <strong id="booking-modal-prop-price">₹65,00,000</strong>
+          </div>
+          <hr style="border: 0; border-top: 1px solid var(--border); margin: 12px 0;">
+          <div style="display: flex; justify-content: space-between; font-size: 1.15rem;">
+            <span>Booking Amount Payable:</span>
+            <strong id="booking-modal-token-amount" style="color: var(--primary);">₹5,00,000</strong>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Select Payment Method</label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <label style="border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="paymentMethod" value="UPI" checked>
+              <strong>UPI (GPay / PhonePe)</strong>
+            </label>
+            <label style="border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="paymentMethod" value="Credit Card">
+              <strong>Credit Card</strong>
+            </label>
+            <label style="border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="paymentMethod" value="Debit Card">
+              <strong>Debit Card</strong>
+            </label>
+            <label style="border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="paymentMethod" value="Bank Transfer">
+              <strong>Bank Transfer</strong>
+            </label>
+          </div>
+        </div>
+
+        <!-- Optional simulation of failure for viva/demo -->
+        <div style="margin-bottom: 20px; font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+          <input type="checkbox" id="chk-simulate-failure">
+          <label for="chk-simulate-failure" style="cursor: pointer;">Test Mode: Simulate Gateway Payment Failure (Demonstrate SQL Rollback)</label>
+        </div>
+
+        <button type="button" id="btn-execute-payment" onclick="executePaymentBooking()" class="btn btn-primary" style="width: 100%; padding: 14px;">
+          Proceed to Pay & Confirm Booking
+        </button>
+      </div>
+
+      <!-- Step 2: Processing Spinner -->
+      <div id="booking-step-processing" style="display: none; text-align: center; padding: 40px 20px;">
+        <div class="user-avatar" style="width: 60px; height: 60px; margin: 0 auto 20px; font-size: 1.5rem; animation: pulse 1s infinite alternate;">⏳</div>
+        <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 8px;">Processing Atomic Transaction...</h3>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">
+          Executing database transaction: verifying row lock, creating booking record, and logging payment transaction in MySQL.
+        </p>
+      </div>
+
+      <!-- Step 3: Success Screen -->
+      <div id="booking-step-success" style="display: none; text-align: center; padding: 30px 10px;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--success-bg); color: var(--success); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 16px; font-weight: 800;">
+          ✓
+        </div>
+        <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--success); margin-bottom: 6px;">Booking & Payment Confirmed!</h3>
+        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;">
+          The property status has been updated to <strong>Booked</strong> via database trigger.
+        </p>
+
+        <div style="background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; text-align: left; font-size: 0.9rem; margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span style="color: var(--text-muted);">Booking Reference:</span>
+            <strong id="receipt-booking-id">#B1001</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span style="color: var(--text-muted);">Transaction ID:</span>
+            <strong id="receipt-txn-id">TXN20260926001</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span style="color: var(--text-muted);">Paid Amount:</span>
+            <strong id="receipt-amount" style="color: var(--primary);">₹5,00,000</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--text-muted);">Status:</span>
+            <span class="badge badge-success">Completed & Committed</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px;">
+          <a href="/customer/index.html?tab=bookings" class="btn btn-primary" style="flex: 1;">
+            View in My Bookings
+          </a>
+          <button onclick="closeModal('modal-booking-payment'); window.location.reload();" class="btn btn-outline" style="flex: 1;">
+            Done
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL 3: WRITE REVIEW MODAL
+       ============================================================ -->
+  <div id="modal-review" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeModal('modal-review')">✕</button>
+      <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;">Write a Review</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+        Share your experience regarding property condition, neighborhood, and agent service.
+      </p>
+
+      <form id="form-submit-review" onsubmit="handleReviewSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Your Rating (1 to 5 Stars)</label>
+          <div id="star-picker" style="font-size: 1.8rem; cursor: pointer; color: #cbd5e1; display: flex; gap: 6px;">
+            <span data-star="1">★</span>
+            <span data-star="2">★</span>
+            <span data-star="3">★</span>
+            <span data-star="4">★</span>
+            <span data-star="5">★</span>
+          </div>
+          <input type="hidden" id="review-rating-val" value="5">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Your Feedback / Review</label>
+          <textarea id="review-comment-input" class="form-textarea" rows="4" placeholder="Write your honest review here..." required></textarea>
+        </div>
+
+        <button type="submit" id="btn-submit-review" class="btn btn-primary" style="width: 100%;">
+          Submit Review
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/property-details.js"></script>
+</body>
+</html>

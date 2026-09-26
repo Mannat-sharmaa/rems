@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About REMS — Academic DBMS Project</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="nav-logo">
+        <div class="nav-logo-icon">🏢</div>
+        <span>REMS</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/properties.html" class="nav-link">Properties</a></li>
+        <li><a href="/about.html" class="nav-link active">About</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">🌙</button>
+        <div id="nav-auth-actions" style="display: flex; align-items: center; gap: 10px;">
+          <a href="/login.html" class="btn btn-outline btn-sm">Login</a>
+          <a href="/register.html" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="section" style="max-width: 1000px;">
+    <span class="section-badge">Academic Project Overview</span>
+    <h1 class="section-title" style="margin-bottom: 20px;">Real Estate Management System (REMS)</h1>
+    <p class="section-desc" style="font-size: 1.15rem; margin-bottom: 40px;">
+      A comprehensive Database Management System (DBMS) capstone project developed for the 5th Semester B.Tech AI & Data Science curriculum.
+    </p>
+
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 32px; margin-bottom: 36px; box-shadow: var(--shadow-sm);">
+      <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; color: var(--primary);">🎯 Project Objectives</h3>
+      <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 16px;">
+        To design and implement a production-grade relational database architecture solving complex concurrency, data integrity, and analytical reporting challenges in real estate commerce. Moving far beyond basic CRUD tutorials, the system demonstrates:
+      </p>
+      <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 20px;">
+        <li><strong>Strict 3NF Normalization:</strong> Elimination of insertion, update, and deletion anomalies across 12 relational entities.</li>
+        <li><strong>ACID Transactions:</strong> Atomic property reservations with row-level locks (`SELECT FOR UPDATE`) preventing double-booking race conditions.</li>
+        <li><strong>Automated Triggers:</strong> Real-time status transitions (`Available` → `Booked` → `Sold` / `Rented`) and rating constraints.</li>
+        <li><strong>Stored Procedures:</strong> Parameterized search routines and commission calculators for agents.</li>
+        <li><strong>Database Views:</strong> Pre-aggregated stakeholder summaries and performance ledgers.</li>
+      </ul>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px;">
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px;">
+        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Frontend Stack</h4>
+        <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+          Vanilla HTML5, Modern CSS3 variables, JavaScript ES6+, Custom cursor interpolation, Responsive Glassmorphism Design, and Canvas 3D rendering.
+        </p>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px;">
+        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Backend Stack</h4>
+        <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+          Node.js, Express.js REST APIs, JWT Session Authentication, Bcrypt Password Hashing, and Structured MySQL error management.
+        </p>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px;">
+        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Database Engine</h4>
+        <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+          MySQL 8.x / MariaDB 10.x compatible with MySQL Workbench, InnoDB transactional storage engine, Foreign Keys, and Delimited Triggers.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+</body>
+</html>

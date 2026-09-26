@@ -1,0 +1,29 @@
+{
+  "name": "real-estate-management-system",
+  "version": "1.0.0",
+  "description": "Comprehensive Real Estate Management System (REMS) - College DBMS Project (5th Sem B.Tech AI & DS)",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "db:init": "node database/init_db.js"
+  },
+  "keywords": [
+    "real-estate",
+    "dbms",
+    "mysql",
+    "express",
+    "nodejs",
+    "btech-project"
+  ],
+  "author": "B.Tech AI & DS Student",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.0"
+  }
+}

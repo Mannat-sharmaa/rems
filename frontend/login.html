@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — REMS Real Estate</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .auth-page {
+      min-height: calc(100vh - 72px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      background: radial-gradient(circle at 50% 30%, rgba(37, 99, 235, 0.08) 0%, transparent 65%);
+    }
+    .auth-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 40px;
+      max-width: 460px;
+      width: 100%;
+    }
+    .demo-accounts-box {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .demo-pill-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      background: var(--bg-main);
+      color: var(--text-main);
+      margin: 4px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .demo-pill-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="nav-logo">
+        <div class="nav-logo-icon">🏢</div>
+        <span>REMS</span>
+      </a>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">🌙</button>
+        <a href="/register.html" class="btn btn-outline btn-sm">Create Account</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="auth-page">
+    <div class="auth-card">
+      <div style="text-align: center; margin-bottom: 28px;">
+        <div class="nav-logo-icon" style="margin: 0 auto 14px; width: 48px; height: 48px; font-size: 1.4rem;">🏢</div>
+        <h2 style="font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px;">Welcome Back</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem; margin-top: 6px;">Sign in to access your properties, visits, and bookings</p>
+      </div>
+
+      <form id="form-login">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="login-email" class="form-input" placeholder="name@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" id="btn-login-submit" class="btn btn-primary" style="width: 100%; margin-top: 10px; padding: 13px;">
+          Sign In
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">
+        Don't have an account? <a href="/register.html" style="color: var(--primary); font-weight: 700;">Register as Customer</a>
+      </div>
+
+      <!-- Quick Demo Account Picker for Viva / Presentation -->
+      <div class="demo-accounts-box">
+        <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-light); margin-bottom: 10px;">
+          ⚡ 1-Click Demo Profiles (Presentation Ready)
+        </div>
+        <button type="button" class="demo-pill-btn" data-email="mannat@example.com" data-password="password123" data-role="Customer (Mannat)">
+          👤 Customer: Mannat
+        </button>
+        <button type="button" class="demo-pill-btn" data-email="rahul.agent@rems.com" data-password="password123" data-role="Agent (Rahul)">
+          💼 Agent: Rahul Sharma
+        </button>
+        <button type="button" class="demo-pill-btn" data-email="admin@rems.com" data-password="admin123" data-role="Administrator">
+          👑 Admin Central
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>
