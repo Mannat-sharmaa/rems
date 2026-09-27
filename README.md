@@ -332,6 +332,7 @@ During presentation or viva, demonstrate this exact workflow:
 d:\dbms\
 ├── package.json               # Express, mysql2, bcryptjs, jsonwebtoken dependencies
 ├── .env                       # Database connection parameters & server port
+├── run_all.bat                # ⚡ 1-click all-in-one launcher (Starts MySQL + Backend + Opens Browser)
 ├── start_mysql.bat            # 1-click batch script to launch pre-bundled MySQL server
 ├── stop_mysql.bat             # 1-click batch script to stop MySQL server
 ├── mysql_cli.bat              # Instant interactive terminal access to MySQL CLI
@@ -375,6 +376,8 @@ d:\dbms\
     ├── property-details.html  # Full details, gallery, visit modal, booking/payment modal
     ├── login.html             # Sign in with 1-click demo accounts
     ├── register.html          # Customer registration
+    ├── terms.html             # Terms of Service & ACID concurrency policy
+    ├── privacy.html           # Privacy Policy & database security standards
     ├── about.html             # Academic project overview
     ├── contact.html           # Advisory contact form
     ├── customer/
@@ -401,44 +404,71 @@ d:\dbms\
 
 ## 13. Installation & Setup Instructions
 
-### Prerequisites
-* **Node.js:** v18 or higher (tested on Node v24.11 LTS).
-* **MySQL:** Oracle MySQL Community Server 8.0 is pre-configured and included in the project directory (`mysql-8.0.46-winx64`), so **no manual installation is needed**! Simply run `start_mysql.bat`. It listens on `localhost:3306` with standard MySQL syntax and is 100% compatible with MySQL Workbench.
-
-### Step 1: Start MySQL Database
-Double-click `start_mysql.bat` in the root folder, or run:
+### ⚡ Quick Start: 1-Click Launch (Recommended)
+You can launch the entire project (MySQL + Backend + Browser) with a single command:
 ```powershell
-.\start_mysql.bat
+.\run_all.bat
 ```
-The MySQL server will start listening on `localhost:3306`.
+This launcher automatically:
+1. Starts the Oracle MySQL 8.0 Community Server on port 3306.
+2. Waits 2 seconds for the database socket to bind.
+3. Automatically opens your default web browser to `http://localhost:5000`.
+4. Starts the Node.js Express backend server.
 
-### Step 2: Initialize Database & Seed Realistic Data
-In your terminal, run:
+---
+
+### 💻 VS Code Terminal: All-in-One Execution Commands
+
+When working inside Visual Studio Code:
+1. Open folder `d:\dbms` (`File` -> `Open Folder...`).
+2. Open the integrated terminal (`Ctrl + ~`).
+3. Use the following commands:
+
+| Action | Terminal Command | Description |
+| :--- | :--- | :--- |
+| **⚡ 1-Click Run All** | `.\run_all.bat` | Starts MySQL server, opens browser, and starts backend |
+| **Start MySQL Server** | `.\start_mysql.bat` | Launches Oracle MySQL 8.0 on `localhost:3306` |
+| **Initialize / Reset DB** | `npm run db:init` | Creates 13 tables, views, triggers, procedures & 30 seed records |
+| **Start Express Server** | `npm start` | Runs backend server on `http://localhost:5000` |
+| **Open MySQL Terminal** | `.\mysql_cli.bat` | Interactive MySQL console connected to `real_estate_db` |
+| **Stop MySQL Server** | `.\stop_mysql.bat` | Safely shuts down the background MySQL process |
+
+---
+
+### 🖥️ Fresh Setup on a New Computer / College Lab PC
+
+If you are cloning this repository on a fresh lab machine or another laptop:
+
 ```powershell
+# 1. Clone repository from GitHub
+git clone https://github.com/Mannat-sharmaa/rems.git
+
+# 2. Enter project folder
+cd rems
+
+# 3. Install Node.js dependencies
+npm install
+
+# 4. Initialize Database & Seed Realistic Data
 npm run db:init
-```
-This script automatically:
-1. Connects to MySQL on port 3306.
-2. Drops and recreates `real_estate_db`.
-3. Executes `schema.sql` (12 relational tables + constraints).
-4. Executes `views.sql` (6 analytical views).
-5. Executes `sample_data.sql` (pre-loaded with 10 owners, 10 agents, 20 customers, 30 properties, visits, bookings, payments, and sales).
-6. Attaches `triggers.sql` and `procedures.sql`.
-7. Verifies table record counts and confirms success!
 
-### Step 3: Start the Backend & Web Application
-Run:
-```powershell
-npm start
+# 5. Launch everything with 1 click
+.\run_all.bat
 ```
-The server will start on **`http://localhost:5000`**.
 
-Open your browser and navigate to:
-* **Public Website:** `http://localhost:5000`
-* **Properties Search:** `http://localhost:5000/properties.html`
-* **Customer Dashboard:** `http://localhost:5000/customer/index.html`
-* **Agent Workspace:** `http://localhost:5000/agent/index.html`
-* **Admin Central:** `http://localhost:5000/admin/index.html`
+---
+
+### 🌐 Application Portals & URLs
+
+| Portal | URL | Description |
+| :--- | :--- | :--- |
+| **Public Website** | `http://localhost:5000` | Landing page, featured properties, 3D architectural canvas |
+| **Properties Search** | `http://localhost:5000/properties.html` | Real-time multi-criteria property search with filters |
+| **Customer Portal** | `http://localhost:5000/customer/index.html` | Bookings, visit timeline, payment receipts |
+| **Agent Workspace** | `http://localhost:5000/agent/index.html` | Property wizard, listings, commission ledger |
+| **Admin Central** | `http://localhost:5000/admin/index.html` | Executive KPIs, 12 Reports, 32-query DBMS SQL Console |
+| **Terms of Service** | `http://localhost:5000/terms.html` | Platform terms, ACID double-booking policy, refunds |
+| **Privacy Policy** | `http://localhost:5000/privacy.html` | Data protection, bcrypt hashing, IT Act compliance |
 
 ---
 
