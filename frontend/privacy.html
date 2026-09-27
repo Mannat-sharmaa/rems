@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — REMS Real Estate</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .legal-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    .legal-header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .legal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .legal-card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .legal-card p, .legal-card li {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .legal-card ul {
+      padding-left: 22px;
+      margin: 12px 0;
+    }
+    .legal-card li {
+      margin-bottom: 8px;
+    }
+    .legal-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      margin-bottom: 12px;
+    }
+    .table-of-contents {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .toc-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .toc-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 8px 16px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .toc-list a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .toc-list a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="nav-logo">
+        <div class="nav-logo-icon">🏢</div>
+        <span>REMS</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/properties.html" class="nav-link">Properties</a></li>
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">🌙</button>
+        <div id="nav-auth-actions" style="display: flex; align-items: center; gap: 10px;">
+          <a href="/login.html" class="btn btn-outline btn-sm">Login</a>
+          <a href="/register.html" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="legal-container">
+    <div class="legal-header">
+      <span class="legal-badge">Data Privacy & Security</span>
+      <h1 class="section-title" style="margin-bottom: 12px; font-size: 2.2rem;">Privacy Policy</h1>
+      <p class="section-desc" style="margin-bottom: 14px;">
+        Last Updated: September 2026 • Compliant with Indian IT Act (SPDI Rules) & Global Privacy Standards
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+        At <strong>REMS Real Estate</strong>, your personal and property privacy is our utmost priority. This Privacy Policy details how we collect, store, encrypt, process, and safeguard your data across our enterprise MySQL relational platform.
+      </p>
+    </div>
+
+    <!-- Quick Table of Contents -->
+    <div class="table-of-contents">
+      <div class="toc-title">📑 Table of Contents</div>
+      <ul class="toc-list">
+        <li><a href="#section-1">1. Information We Collect</a></li>
+        <li><a href="#section-2">2. How We Use Your Data</a></li>
+        <li><a href="#section-3">3. Database Security & Encryption</a></li>
+        <li><a href="#section-4">4. Sharing & Disclosure Policy</a></li>
+        <li><a href="#section-5">5. Cookies & Local Storage</a></li>
+        <li><a href="#section-6">6. User Privacy Rights</a></li>
+        <li><a href="#section-7">7. Data Retention & Erasure</a></li>
+        <li><a href="#section-8">8. Privacy Inquiries & DPO</a></li>
+      </ul>
+    </div>
+
+    <!-- Section 1 -->
+    <section id="section-1" class="legal-card">
+      <h2>1. Information We Collect</h2>
+      <p>We collect only the data necessary to provide seamless property discovery, site visits, and transactional operations:</p>
+      <ul>
+        <li><strong>Account Profile Data:</strong> Full name, verified email address, contact phone number, residential address, and account role (Customer, Agent, Owner, Admin).</li>
+        <li><strong>Property Information:</strong> Listing titles, legal addresses, city, geographic attributes, square footage, floor numbers, architectural photos, and ownership deeds.</li>
+        <li><strong>Transactional & Payment Records:</strong> Booking IDs, token payment amounts, transaction timestamps, payment method (UPI, Cards, Net Banking), and alphanumeric transaction reference hashes. We do not store raw bank PINs or CVV numbers.</li>
+        <li><strong>Activity & Visit Logs:</strong> Scheduled physical inspection dates, property ratings, feedback reviews, and real-time dashboard notifications.</li>
+      </ul>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="section-2" class="legal-card">
+      <h2>2. How We Use Your Data</h2>
+      <p>Collected data is processed strictly for the following purposes:</p>
+      <ul>
+        <li><strong>Facilitating Real Estate Transactions:</strong> Matching prospective buyers and renters with verified property listings.</li>
+        <li><strong>Visit Scheduling & Dispatch:</strong> Transmitting tour requests to designated agents with customer phone numbers for coordination.</li>
+        <li><strong>Atomic Booking & Ledger Accounting:</strong> Locking property availability during token transactions and generating digital booking receipts.</li>
+        <li><strong>Analytical Reporting:</strong> Generating internal performance views (e.g. <code>vw_agent_performance</code> and <code>vw_revenue_summary</code>) for platform administrators.</li>
+        <li><strong>Platform Security:</strong> Detecting suspicious login attempts, spam accounts, or malicious SQL injection vectors.</li>
+      </ul>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="section-3" class="legal-card">
+      <h2>3. Database Security & Encryption</h2>
+      <p>
+        REMS implements industry-standard DBMS security safeguards designed to prevent data theft, unauthorized alterations, and eavesdropping:
+      </p>
+      <ul>
+        <li><strong>Cryptographic Password Hashing:</strong> Passwords are never stored in plaintext; they are salted and hashed using the <code>bcrypt</code> algorithm (10 salt rounds).</li>
+        <li><strong>Stateless Authentication:</strong> Authenticated sessions utilize signed JSON Web Tokens (JWT) with strict expiration policies.</li>
+        <li><strong>SQL Injection Shielding:</strong> All database queries utilize parameterized SQL statements via MySQL2 connection pools, eliminating query injection vulnerabilities.</li>
+        <li><strong>Role-Based Access Control (RBAC):</strong> Customers cannot access agent or administrative tables; relational permissions are checked before executing any REST endpoint.</li>
+        <li><strong>ACID Isolation:</strong> Concurrency is strictly controlled with InnoDB row-level locking to prevent race conditions during checkout.</li>
+      </ul>
+    </section>
+
+    <!-- Section 4 -->
+    <section id="section-4" class="legal-card">
+      <h2>4. Sharing & Disclosure Policy</h2>
+      <p>
+        <strong>We do not sell, rent, trade, or monetize your personal data.</strong> Your information is only shared under explicit operational conditions:
+      </p>
+      <ul>
+        <li><strong>With Assigned Agents:</strong> When a customer schedules a visit or submits a booking, the property's assigned agent receives contact details to coordinate the physical inspection.</li>
+        <li><strong>With Property Owners:</strong> Verified owners receive booking notifications regarding their registered real estate assets.</li>
+        <li><strong>Legal & Regulatory Mandates:</strong> Data may be disclosed if required by valid judicial subpoena, court order, or national property regulatory authority.</li>
+      </ul>
+    </section>
+
+    <!-- Section 5 -->
+    <section id="section-5" class="legal-card">
+      <h2>5. Cookies & Local Storage</h2>
+      <p>
+        REMS uses browser LocalStorage and minimal session cookies solely for functional application operation:
+      </p>
+      <ul>
+        <li><code>rems_token</code>: Holds your secure JWT authentication token for dashboard access.</li>
+        <li><code>rems_user</code>: Caches your basic user metadata (name, role, email) for instant dashboard rendering.</li>
+        <li><code>theme</code>: Persists your Dark / Light display preference across page visits.</li>
+      </ul>
+      <p>We do not use intrusive third-party cross-site advertising trackers or analytics cookies.</p>
+    </section>
+
+    <!-- Section 6 -->
+    <section id="section-6" class="legal-card">
+      <h2>6. User Privacy Rights</h2>
+      <p>You have full legal control over your personal information:</p>
+      <ul>
+        <li><strong>Right to Access:</strong> You can review all your profile details, past visits, reviews, and bookings directly from your Customer or Agent dashboard.</li>
+        <li><strong>Right to Rectification:</strong> Update inaccurate contact information, addresses, or profile details at any time.</li>
+        <li><strong>Right to Data Portability:</strong> Request an export of your property transaction history in digital format.</li>
+        <li><strong>Right to Account Closure:</strong> Request permanent removal of your account, provided no active legal contracts or unpaid bookings remain pending.</li>
+      </ul>
+    </section>
+
+    <!-- Section 7 -->
+    <section id="section-7" class="legal-card">
+      <h2>7. Data Retention & Erasure</h2>
+      <p>
+        We retain personal data only for as long as your account is active or as necessary to fulfill the commercial and legal purposes outlined in this policy. Completed financial transactions (sales, rentals, and payments) are maintained in accordance with statutory accounting and tax retention regulations (minimum 7 years).
+      </p>
+    </section>
+
+    <!-- Section 8 -->
+    <section id="section-8" class="legal-card">
+      <h2>8. Privacy Inquiries & Data Protection Officer</h2>
+      <p>
+        If you have questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact our Data Protection Advisory:
+      </p>
+      <div style="background: var(--bg-body); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-top: 14px;">
+        <strong>REMS Privacy & Data Protection Office</strong><br>
+        Email: <a href="mailto:privacy@rems.com" style="color: var(--primary);">privacy@rems.com</a><br>
+        Support: <a href="mailto:advisory@rems.com" style="color: var(--primary);">advisory@rems.com</a><br>
+        Address: REMS Towers, Sector 67, IT City Road, Mohali, Punjab 160062
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>REMS Real Estate</h3>
+        <p style="line-height: 1.6; margin-bottom: 18px; max-width: 320px;">
+          Next-generation Real Estate Management System built as a comprehensive 5th semester B.Tech AI & DS DBMS project.
+        </p>
+        <div style="font-size: 0.85rem; color: #64748b;">
+          Database: MySQL 8 Community Server (Normalized 3NF Relational Schema)
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/properties.html">Search Properties</a></li>
+          <li><a href="/about.html">About Project</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Portals</h4>
+        <ul class="footer-links">
+          <li><a href="/customer/index.html">Customer Dashboard</a></li>
+          <li><a href="/agent/index.html">Agent Workspace</a></li>
+          <li><a href="/admin/index.html">Admin Central</a></li>
+          <li><a href="/login.html">Sign In</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal & Policies</h4>
+        <ul class="footer-links">
+          <li><a href="/terms.html">Terms of Service</a></li>
+          <li><a href="/privacy.html" style="color: #60a5fa; font-weight: 600;">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 REMS — Real Estate Management System. All rights reserved.</div>
+      <div>5th Sem B.Tech AI & DS DBMS Project</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+</body>
+</html>

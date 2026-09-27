@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — REMS Real Estate</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .legal-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    .legal-header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .legal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .legal-card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .legal-card p, .legal-card li {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .legal-card ul {
+      padding-left: 22px;
+      margin: 12px 0;
+    }
+    .legal-card li {
+      margin-bottom: 8px;
+    }
+    .legal-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .table-of-contents {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .toc-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .toc-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 8px 16px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .toc-list a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .toc-list a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/index.html" class="nav-logo">
+        <div class="nav-logo-icon">🏢</div>
+        <span>REMS</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/properties.html" class="nav-link">Properties</a></li>
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">🌙</button>
+        <div id="nav-auth-actions" style="display: flex; align-items: center; gap: 10px;">
+          <a href="/login.html" class="btn btn-outline btn-sm">Login</a>
+          <a href="/register.html" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="legal-container">
+    <div class="legal-header">
+      <span class="legal-badge">Legal Documentation</span>
+      <h1 class="section-title" style="margin-bottom: 12px; font-size: 2.2rem;">Terms of Service</h1>
+      <p class="section-desc" style="margin-bottom: 14px;">
+        Last Updated: September 2026 • Effective Date: September 2026
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+        Welcome to the <strong>Real Estate Management System (REMS)</strong>. Please read these Terms of Service ("Terms") carefully before accessing or using our platform, dashboards, and associated property management services.
+      </p>
+    </div>
+
+    <!-- Quick Table of Contents -->
+    <div class="table-of-contents">
+      <div class="toc-title">📑 Table of Contents</div>
+      <ul class="toc-list">
+        <li><a href="#section-1">1. Acceptance of Terms</a></li>
+        <li><a href="#section-2">2. User Roles & Account Eligibility</a></li>
+        <li><a href="#section-3">3. Property Listings & Verification</a></li>
+        <li><a href="#section-4">4. Visit Scheduling & Fair Usage</a></li>
+        <li><a href="#section-5">5. Booking Transactions & Concurrency</a></li>
+        <li><a href="#section-6">6. Fees, Token Deposits & Refunds</a></li>
+        <li><a href="#section-7">7. Prohibited Conduct</a></li>
+        <li><a href="#section-8">8. Limitation of Liability</a></li>
+        <li><a href="#section-9">9. Governing Law & Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Section 1 -->
+    <section id="section-1" class="legal-card">
+      <h2>1. Acceptance of Terms</h2>
+      <p>
+        By creating an account, browsing property listings, scheduling physical site visits, or initiating bookings on REMS, you acknowledge that you have read, understood, and agreed to be legally bound by these Terms of Service and our <a href="/privacy.html" style="color: var(--primary); font-weight: 600;">Privacy Policy</a>. If you do not agree to these terms, you must discontinue using the platform immediately.
+      </p>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="section-2" class="legal-card">
+      <h2>2. User Roles & Account Eligibility</h2>
+      <p>REMS operates on a role-based architectural model. You agree to provide accurate and truthful identification upon registration:</p>
+      <ul>
+        <li><strong>Customers / Buyers:</strong> May search properties, schedule visits with designated agents, submit token bookings, and write authenticated reviews.</li>
+        <li><strong>Real Estate Agents:</strong> Must maintain active professional licensure, represent properties accurately, manage visits promptly, and adhere to statutory commission guidelines.</li>
+        <li><strong>Property Owners:</strong> Must possess legal title and authority to sell, lease, or rent the listed properties without undisclosed liens or encumbrances.</li>
+        <li><strong>System Administrators:</strong> Retain supervisory rights to moderate listings, audit financial transactions, enforce database schema rules, and resolve disputes.</li>
+      </ul>
+      <p>You are responsible for safeguarding your login credentials. REMS will not be liable for any unauthorized access resulting from compromised passwords.</p>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="section-3" class="legal-card">
+      <h2>3. Property Listings & Verification</h2>
+      <p>
+        While agents and property owners are required to provide accurate dimensions, pricing, structural details, and real photos:
+      </p>
+      <ul>
+        <li>Listings are subject to municipal verification, zoning compliance, and physical site inspection.</li>
+        <li>Price quotes displayed on the portal are exclusive of statutory stamp duty, legal registration charges, GST, and municipal transfer levies unless explicitly declared.</li>
+        <li>REMS reserves the right to edit, unpublish, or permanently delete any listing containing misleading specs, deceptive imagery, or fraudulent ownership claims.</li>
+      </ul>
+    </section>
+
+    <!-- Section 4 -->
+    <section id="section-4" class="legal-card">
+      <h2>4. Visit Scheduling & Fair Usage</h2>
+      <p>
+        Customers may book physical tours of properties through the platform. By scheduling a visit:
+      </p>
+      <ul>
+        <li>You agree to arrive on time at the designated property coordinates.</li>
+        <li>Cancellations or rescheduling requests must be submitted at least 4 hours in advance via your Customer Dashboard.</li>
+        <li>Abusive booking patterns, repeated no-shows, or harassing behavior towards agents will lead to immediate account suspension.</li>
+      </ul>
+    </section>
+
+    <!-- Section 5 -->
+    <section id="section-5" class="legal-card">
+      <h2>5. Booking Transactions & Concurrency Policy</h2>
+      <p>
+        REMS employs strict Database ACID (Atomicity, Consistency, Isolation, Durability) transaction protocols:
+      </p>
+      <ul>
+        <li><strong>Double-Booking Prevention:</strong> When a customer submits a booking, the property is locked via database row-level locking (`SELECT ... FOR UPDATE`). Only one transaction can successfully reserve the property.</li>
+        <li><strong>Status Transitions:</strong> Upon successful transaction confirmation, an automated database trigger updates the property status from <code>Available</code> to <code>Booked</code> or <code>Sold</code>, ensuring real-time consistency across all user dashboards.</li>
+        <li><strong>Binding Nature:</strong> An online token booking reserves the exclusive negotiation and acquisition right for a standard duration of 14 calendar days, pending final deed execution.</li>
+      </ul>
+    </section>
+
+    <!-- Section 6 -->
+    <section id="section-6" class="legal-card">
+      <h2>6. Fees, Token Deposits & Refunds</h2>
+      <p>
+        Token payments made through the portal serve as an earnest money deposit:
+      </p>
+      <ul>
+        <li>All digital payments (UPI, Cards, Net Banking) generate an automated cryptographic transaction ID and printable receipt.</li>
+        <li>If a seller fails to produce clean title deeds within the reservation window, the token deposit is 100% refundable to the customer.</li>
+        <li>If a buyer arbitrarily withdraws from an agreed purchase without legal cause, cancellation fees may apply as per the bilateral agent-customer agreement.</li>
+      </ul>
+    </section>
+
+    <!-- Section 7 -->
+    <section id="section-7" class="legal-card">
+      <h2>7. Prohibited Conduct</h2>
+      <p>Users must not engage in any of the following activities on REMS:</p>
+      <ul>
+        <li>Injecting SQL commands, malicious scripts, or denial-of-service attempts against backend APIs or the MySQL database server.</li>
+        <li>Scraping listing data, agent phone numbers, or property photos using automated bots or spiders.</li>
+        <li>Submitting fraudulent reviews, artificial price quotes, or non-existent listings.</li>
+        <li>Circumventing platform communication to evade contractual agent commissions.</li>
+      </ul>
+    </section>
+
+    <!-- Section 8 -->
+    <section id="section-8" class="legal-card">
+      <h2>8. Disclaimers & Limitation of Liability</h2>
+      <p>
+        REMS is provided on an "AS IS" and "AS AVAILABLE" basis. While we strive for 99.9% uptime and rigorous data consistency:
+      </p>
+      <ul>
+        <li>REMS does not act as a licensed real estate broker or escrow bank directly; transactions are agreements between buyer, owner, and licensed agents.</li>
+        <li>To the maximum extent permitted by applicable law, REMS, its developers, and academic institutions are not liable for incidental, indirect, or consequential damages resulting from property title defects or market fluctuations.</li>
+      </ul>
+    </section>
+
+    <!-- Section 9 -->
+    <section id="section-9" class="legal-card">
+      <h2>9. Governing Law & Contact</h2>
+      <p>
+        These terms shall be governed by and construed in accordance with the laws of India. For questions or legal concerns regarding these Terms, please reach out via our <a href="/contact.html" style="color: var(--primary); font-weight: 600;">Contact Page</a> or write directly to:
+      </p>
+      <div style="background: var(--bg-body); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-top: 14px;">
+        <strong>REMS Legal & Compliance Advisory</strong><br>
+        Email: <a href="mailto:advisory@rems.com" style="color: var(--primary);">advisory@rems.com</a><br>
+        Address: REMS Towers, Sector 67, IT City Road, Mohali, Punjab 160062
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>REMS Real Estate</h3>
+        <p style="line-height: 1.6; margin-bottom: 18px; max-width: 320px;">
+          Next-generation Real Estate Management System built as a comprehensive 5th semester B.Tech AI & DS DBMS project.
+        </p>
+        <div style="font-size: 0.85rem; color: #64748b;">
+          Database: MySQL 8 Community Server (Normalized 3NF Relational Schema)
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/properties.html">Search Properties</a></li>
+          <li><a href="/about.html">About Project</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Portals</h4>
+        <ul class="footer-links">
+          <li><a href="/customer/index.html">Customer Dashboard</a></li>
+          <li><a href="/agent/index.html">Agent Workspace</a></li>
+          <li><a href="/admin/index.html">Admin Central</a></li>
+          <li><a href="/login.html">Sign In</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal & Policies</h4>
+        <ul class="footer-links">
+          <li><a href="/terms.html" style="color: #60a5fa; font-weight: 600;">Terms of Service</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 REMS — Real Estate Management System. All rights reserved.</div>
+      <div>5th Sem B.Tech AI & DS DBMS Project</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+</body>
+</html>
